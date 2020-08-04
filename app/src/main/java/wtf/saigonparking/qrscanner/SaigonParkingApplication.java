@@ -32,8 +32,10 @@ public final class SaigonParkingApplication extends Application {
 
     @Setter
     private BaseSaigonParkingActivity currentActivity = null;
+
+    @Getter
     @Setter
-    private Boolean isBooked = false;
+    private boolean isLoggedIn = false;
 
     private static Context applicationContext;
     private WebSocket webSocket;
@@ -48,7 +50,7 @@ public final class SaigonParkingApplication extends Application {
         applicationContext = getApplicationContext();
     }
 
-    public void initWebSocketConnection(@NonNull String token) {
+    public final void initWebSocketConnection(@NonNull String token) {
         if (webSocket == null) {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
@@ -59,5 +61,15 @@ public final class SaigonParkingApplication extends Application {
             SaigonParkingWebSocketListener listener = new SaigonParkingWebSocketListener(this);
             webSocket = client.newWebSocket(request, listener);
         }
+    }
+
+    public final void reCreateWebSocketConnection(@NonNull String token) {
+        try {
+            webSocket.cancel();
+        } catch (Exception exception) {
+            Log.d("TaiSmile", "Error reCreateWebSocketConnection: " + exception.getClass().getSimpleName());
+        }
+        webSocket = null;
+        initWebSocketConnection(token);
     }
 }

@@ -1,20 +1,15 @@
 package wtf.saigonparking.qrscanner.activity;
 
 import android.Manifest;
-import android.app.Dialog;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
-
-import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -25,7 +20,7 @@ import wtf.saigonparking.qrscanner.base.BaseSaigonParkingActivity;
 public final class MainActivity extends BaseSaigonParkingActivity implements ZXingScannerView.ResultHandler {
 
     @BindView(R.id.lightButton)
-    ImageView flashImageView;
+    protected ImageView flashImageView;
 
     private ZXingScannerView mScannerView;
     private boolean flashState = false;
@@ -59,25 +54,16 @@ public final class MainActivity extends BaseSaigonParkingActivity implements ZXi
 
     @Override
     public void handleResult(Result rawResult) {
+        String content = rawResult.getText();
 
+        if (!applicationContext.isLoggedIn()) {
+            /* scan QR code to create socket connection */
+            /* TODO: after 10s not create connection successfully --> close and reopen connection */
+            applicationContext.initWebSocketConnection(content);
 
-        // show custom alert dialog
-        Dialog dialog = new Dialog(this);
-        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
-        dialog.setCancelable(true);
-        dialog.setContentView(R.layout.custom_dialog);
-
-        View v = Objects.requireNonNull(dialog.getWindow()).getDecorView();
-        v.setBackgroundResource(android.R.color.transparent);
-
-        ImageView img = dialog.findViewById(R.id.imgOfDialog);
-        img.setImageResource(R.drawable.ic_done_gr);
-
-        Log.d("TaiSmile", "accessToken: " + rawResult.getText());
-
-        dialog.setOnCancelListener(dialog1 ->
-                mScannerView.resumeCameraPreview(MainActivity.this));
-        dialog.show();
+        } else {
+            /* scan QR code to finish booking */
+        }
     }
 
     @Override
@@ -115,6 +101,13 @@ public final class MainActivity extends BaseSaigonParkingActivity implements ZXi
                     flashState = false;
                 }
                 break;
+        }
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (!applicationContext.isLoggedIn()) {
+            changeActivity(LoginActivity.class, false);
         }
     }
 }

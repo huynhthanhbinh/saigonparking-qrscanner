@@ -26,11 +26,13 @@ public abstract class BaseSaigonParkingService extends Service {
      * for example sendMessage: sendWebSocketBinaryMessage/TextMessage(msg)
      */
     private WebSocket webSocket;
+    protected SaigonParkingApplication applicationContext;
 
     @Override
     public void onCreate() {
         super.onCreate();
-        webSocket = ((SaigonParkingApplication) getApplicationContext()).getWebSocket();
+        applicationContext = ((SaigonParkingApplication) getApplicationContext());
+        webSocket = applicationContext.getWebSocket();
     }
 
     protected void sendWebSocketBinaryMessage(@NonNull SaigonParkingMessage message) {

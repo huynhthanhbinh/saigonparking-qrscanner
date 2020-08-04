@@ -1,5 +1,6 @@
 package wtf.saigonparking.qrscanner.base;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -26,12 +27,21 @@ public abstract class BaseSaigonParkingActivity extends AppCompatActivity {
      * for example sendMessage: sendWebSocketBinaryMessage/TextMessage(msg)
      */
     private WebSocket webSocket;
+    protected SaigonParkingApplication applicationContext;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        ((SaigonParkingApplication) getApplicationContext()).setCurrentActivity(this);
-        webSocket = ((SaigonParkingApplication) getApplicationContext()).getWebSocket();
+        applicationContext = ((SaigonParkingApplication) getApplicationContext());
+        applicationContext.setCurrentActivity(this);
+        webSocket = applicationContext.getWebSocket();
+    }
+
+    public final void changeActivity(Class<? extends BaseSaigonParkingActivity> nextActivityClass, boolean canBack) {
+        startActivity(new Intent(this, nextActivityClass));
+        if (!canBack) {
+            finish();
+        }
     }
 
     protected final void sendWebSocketBinaryMessage(@NonNull SaigonParkingMessage message) {
