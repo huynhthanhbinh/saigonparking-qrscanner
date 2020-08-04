@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kz.zhakhanyergali.qrscanner.test" >
+    package="wtf.saigonparking.qrscanner.d.test" >
 
     <uses-sdk
-        android:minSdkVersion="18"
-        android:targetSdkVersion="26" />
+        android:minSdkVersion="26"
+        android:targetSdkVersion="27" />
 
     <instrumentation
         android:name="android.support.test.runner.AndroidJUnitRunner"
         android:functionalTest="false"
         android:handleProfiling="false"
-        android:label="Tests for kz.zhakhanyergali.qrscanner"
-        android:targetPackage="kz.zhakhanyergali.qrscanner" />
+        android:label="Tests for wtf.saigonparking.qrscanner.d"
+        android:targetPackage="wtf.saigonparking.qrscanner.d" />
 
     <application android:debuggable="true" >
         <uses-library android:name="android.test.runner" />
