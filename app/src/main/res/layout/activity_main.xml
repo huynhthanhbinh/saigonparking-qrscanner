@@ -12,31 +12,16 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
-        <ImageView
-            android:id="@+id/lightButton"
-            android:clickable="true"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerVertical="true"
-            android:layout_alignParentLeft="true"
-            android:onClick="mainActivityOnClickEvents"
-            android:layout_marginRight="16dp"
-            android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_flash_on"
-            android:scaleType="centerCrop" />
-
 
         <ImageView
-            android:id="@+id/historyButton"
-            android:clickable="true"
+            android:id="@+id/logoutButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
-            android:onClick="mainActivityOnClickEvents"
             android:layout_marginRight="16dp"
             android:layout_marginLeft="16dp"
-            android:src="@drawable/ic_history"
+            android:src="@drawable/ic_logout"
             android:scaleType="centerCrop" />
 
     </RelativeLayout>

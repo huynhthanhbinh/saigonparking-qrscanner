@@ -39,7 +39,7 @@ public abstract class BaseSaigonParkingService extends Service {
         if (webSocket == null) {
             /* TODO: please scan QR code to create new socket connection to server */
             String accessToken = "dang-duc-tai";
-            ((SaigonParkingApplication) getApplicationContext()).initWebSocketConnection(accessToken);
+            ((SaigonParkingApplication) getApplicationContext()).createWebSocketConnection(accessToken);
             webSocket = ((SaigonParkingApplication) getApplicationContext()).getWebSocket();
         }
         webSocket.send(new ByteString(message.toByteArray()));

@@ -45,12 +45,11 @@ public final class SaigonParkingApplication extends Application {
         Log.d("BachMap", "onCreate: wtf.saigonparking.qrscanner.SaigonParkingApplication");
         super.onCreate();
 
-        /* Init all configurations for android mobile apps */
         Locale.setDefault(Locale.US);
         applicationContext = getApplicationContext();
     }
 
-    public final void initWebSocketConnection(@NonNull String token) {
+    public final void createWebSocketConnection(@NonNull String token) {
         if (webSocket == null) {
             OkHttpClient client = new OkHttpClient();
             Request request = new Request.Builder()
@@ -63,13 +62,14 @@ public final class SaigonParkingApplication extends Application {
         }
     }
 
-    public final void reCreateWebSocketConnection(@NonNull String token) {
-        try {
-            webSocket.cancel();
-        } catch (Exception exception) {
-            Log.d("TaiSmile", "Error reCreateWebSocketConnection: " + exception.getClass().getSimpleName());
+    public final void closeWebSocketConnection() {
+        if (webSocket != null) {
+            try {
+                webSocket.cancel();
+            } catch (Exception exception) {
+                Log.d("TaiSmile", "Error closeWebSocketConnection: " + exception.getClass().getSimpleName());
+            }
+            webSocket = null;
         }
-        webSocket = null;
-        initWebSocketConnection(token);
     }
 }

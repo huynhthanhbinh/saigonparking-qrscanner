@@ -3,6 +3,7 @@ package wtf.saigonparking.qrscanner.activity;
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,19 +12,14 @@ import android.widget.Toast;
 
 import com.google.zxing.Result;
 
-import butterknife.BindView;
-import butterknife.OnClick;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import wtf.saigonparking.qrscanner.R;
 import wtf.saigonparking.qrscanner.base.BaseSaigonParkingActivity;
 
 public final class MainActivity extends BaseSaigonParkingActivity implements ZXingScannerView.ResultHandler {
 
-    @BindView(R.id.lightButton)
-    protected ImageView flashImageView;
-
     private ZXingScannerView mScannerView;
-    private boolean flashState = false;
+    private ImageView imgLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,12 +27,24 @@ public final class MainActivity extends BaseSaigonParkingActivity implements ZXi
         setContentView(R.layout.activity_main);
 
         ActivityCompat.requestPermissions(MainActivity.this,
-                new String[]{Manifest.permission.CAMERA},
-                1);
+                new String[]{Manifest.permission.CAMERA}, 1);
+
+        imgLogout = findViewById(R.id.logoutButton);
+        imgLogout.setOnClickListener(this::onLogout);
 
         ViewGroup contentFrame = findViewById(R.id.content_frame);
         mScannerView = new ZXingScannerView(this);
         contentFrame.addView(mScannerView);
+    }
+
+    @SuppressWarnings("unused")
+    private void onLogout(@NonNull View view) {
+        applicationContext.setLoggedIn(false);
+        applicationContext.closeWebSocketConnection();
+        changeActivity(LoginActivity.class, false);
+        Toast.makeText(applicationContext.getCurrentActivity(),
+                "Connection closed !", Toast.LENGTH_SHORT).show();
+        finish();
     }
 
     @Override
@@ -55,11 +63,10 @@ public final class MainActivity extends BaseSaigonParkingActivity implements ZXi
     @Override
     public void handleResult(Result rawResult) {
         String content = rawResult.getText();
-
         if (!applicationContext.isLoggedIn()) {
             /* scan QR code to create socket connection */
             /* TODO: after 10s not create connection successfully --> close and reopen connection */
-            applicationContext.initWebSocketConnection(content);
+            applicationContext.createWebSocketConnection(content);
 
         } else {
             /* scan QR code to finish booking */
@@ -67,40 +74,11 @@ public final class MainActivity extends BaseSaigonParkingActivity implements ZXi
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case 1: {
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                } else {
-                    Toast.makeText(MainActivity.this, "Permission denied to camera", Toast.LENGTH_SHORT).show();
-                }
-                return;
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        if (requestCode == 1) {
+            if (grantResults.length <= 0 || grantResults[0] != PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(MainActivity.this, "Permission denied to camera", Toast.LENGTH_SHORT).show();
             }
-        }
-    }
-
-    @OnClick
-    void mainActivityOnClickEvents(View v) {
-
-        switch (v.getId()) {
-//            case R.id.historyButton:
-//                i = new Intent(this, HistoryActivity.class);
-//                startActivity(i);
-//                break;
-            case R.id.lightButton:
-                if (flashState == false) {
-                    v.setBackgroundResource(R.drawable.ic_flash_off);
-                    Toast.makeText(getApplicationContext(), "Flashlight turned on", Toast.LENGTH_SHORT).show();
-                    mScannerView.setFlash(true);
-                    flashState = true;
-                } else if (flashState) {
-                    v.setBackgroundResource(R.drawable.ic_flash_on);
-                    Toast.makeText(getApplicationContext(), "Flashlight turned off", Toast.LENGTH_SHORT).show();
-                    mScannerView.setFlash(false);
-                    flashState = false;
-                }
-                break;
         }
     }
 
