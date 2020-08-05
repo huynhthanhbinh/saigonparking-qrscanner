@@ -14,7 +14,6 @@ import com.bht.saigonparking.api.grpc.contact.SaigonParkingMessage;
 import java.util.Objects;
 
 import lombok.NonNull;
-import okhttp3.WebSocket;
 import okio.ByteString;
 import wtf.saigonparking.qrscanner.R;
 import wtf.saigonparking.qrscanner.SaigonParkingApplication;
@@ -28,13 +27,12 @@ import wtf.saigonparking.qrscanner.activity.LoginActivity;
 public abstract class BaseSaigonParkingActivity extends AppCompatActivity {
 
     /**
-     * websocket will be private
+     * webSocket will be private
      * so as to any child of this base class cannot call websocket directly !!!!
      * if any child class want to use websocket to send message
      * they must call method inherit from their parent
      * for example sendMessage: sendWebSocketBinaryMessage/TextMessage(msg)
      */
-    private WebSocket webSocket;
     protected SaigonParkingApplication applicationContext;
 
     @Override
@@ -42,7 +40,6 @@ public abstract class BaseSaigonParkingActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         applicationContext = ((SaigonParkingApplication) getApplicationContext());
         applicationContext.setCurrentActivity(this);
-        webSocket = applicationContext.getWebSocket();
     }
 
     public final void changeActivity(Class<? extends BaseSaigonParkingActivity> nextActivityClass, boolean canBack) {
@@ -54,7 +51,7 @@ public abstract class BaseSaigonParkingActivity extends AppCompatActivity {
 
     protected final void sendWebSocketBinaryMessage(@NonNull SaigonParkingMessage message) {
         try {
-            webSocket.send(new ByteString(message.toByteArray()));
+            applicationContext.getWebSocket().send(new ByteString(message.toByteArray()));
 
         } catch (Exception exception) {
 

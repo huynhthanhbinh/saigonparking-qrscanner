@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bht.saigonparking.api.grpc.contact.BookingFinishContent;
+import com.bht.saigonparking.api.grpc.contact.SaigonParkingMessage;
 import com.google.zxing.Result;
 
 import lombok.Getter;
@@ -87,6 +89,17 @@ public final class MainActivity extends BaseSaigonParkingActivity implements ZXi
 
         } else {
             /* scan QR code to finish booking */
+            SaigonParkingMessage message = SaigonParkingMessage.newBuilder()
+                    .setClassification(SaigonParkingMessage.Classification.PARKING_LOT_MESSAGE)
+                    .setType(SaigonParkingMessage.Type.BOOKING_FINISH)
+                    .setReceiverId(0)
+                    .setContent(BookingFinishContent.newBuilder()
+                            .setBookingId(content)
+                            .build()
+                            .toByteString())
+                    .build();
+            sendWebSocketBinaryMessage(message);
+            onScanSuccess();
         }
     }
 

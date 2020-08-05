@@ -32,8 +32,6 @@ public final class SaigonParkingApplication extends Application {
 
     @Setter
     private BaseSaigonParkingActivity currentActivity = null;
-
-    @Getter
     @Setter
     private boolean isLoggedIn = false;
 

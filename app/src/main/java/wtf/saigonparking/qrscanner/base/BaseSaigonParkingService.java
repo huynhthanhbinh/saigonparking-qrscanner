@@ -12,7 +12,6 @@ import com.bht.saigonparking.api.grpc.contact.SaigonParkingMessage;
 import java.util.Objects;
 
 import lombok.NonNull;
-import okhttp3.WebSocket;
 import okio.ByteString;
 import wtf.saigonparking.qrscanner.R;
 import wtf.saigonparking.qrscanner.SaigonParkingApplication;
@@ -26,7 +25,7 @@ import wtf.saigonparking.qrscanner.activity.LoginActivity;
 public abstract class BaseSaigonParkingService extends Service {
 
     /**
-     * websocket will be private
+     * webSocket will be private
      * so as to any child of this base class
      * cannot call websocket directly !!!!
      * <p>
@@ -34,14 +33,12 @@ public abstract class BaseSaigonParkingService extends Service {
      * they must call method inherit from their parent
      * for example sendMessage: sendWebSocketBinaryMessage/TextMessage(msg)
      */
-    private WebSocket webSocket;
     protected SaigonParkingApplication applicationContext;
 
     @Override
     public void onCreate() {
         super.onCreate();
         applicationContext = ((SaigonParkingApplication) getApplicationContext());
-        webSocket = applicationContext.getWebSocket();
     }
 
     public final void changeActivity(Class<? extends BaseSaigonParkingActivity> nextActivityClass, boolean canBack) {
@@ -55,14 +52,13 @@ public abstract class BaseSaigonParkingService extends Service {
 
     protected void sendWebSocketBinaryMessage(@NonNull SaigonParkingMessage message) {
         try {
-            webSocket.send(new ByteString(message.toByteArray()));
+            applicationContext.getWebSocket().send(new ByteString(message.toByteArray()));
 
         } catch (Exception exception) {
 
             applicationContext.setLoggedIn(false);
             applicationContext.closeWebSocketConnection();
 
-            /* TODO: please scan QR code to create new socket connection to server */
             /* Show dialog to force user scan QR to login again */
             Dialog dialog = new Dialog(this);
             dialog.setCancelable(true);

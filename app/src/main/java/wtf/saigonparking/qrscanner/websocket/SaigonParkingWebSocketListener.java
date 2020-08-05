@@ -5,7 +5,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.bht.saigonparking.api.grpc.contact.BookingFinishContent;
 import com.bht.saigonparking.api.grpc.contact.ErrorContent;
 import com.bht.saigonparking.api.grpc.contact.NotificationContent;
 import com.bht.saigonparking.api.grpc.contact.SaigonParkingMessage;
@@ -82,6 +84,11 @@ public final class SaigonParkingWebSocketListener extends WebSocketListener {
 
                             dialog.setOnDismissListener(dialogInterface -> mainActivity.onScanSuccess());
                         }
+                        break;
+                    case BOOKING_FINISH:
+                        BookingFinishContent bookingFinishContent = BookingFinishContent.parseFrom(message.getContent());
+                        Toast.makeText(currentActivity, "Finish booking with id: " +
+                                bookingFinishContent.getBookingId(), Toast.LENGTH_SHORT).show();
                         break;
                 }
             } catch (Exception e) {
