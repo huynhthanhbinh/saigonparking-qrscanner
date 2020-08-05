@@ -63,6 +63,7 @@ public final class SaigonParkingWebSocketListener extends WebSocketListener {
                             /* Create socket connection successfully */
                             applicationContext.setLoggedIn(true);
                             MainActivity mainActivity = (MainActivity) currentActivity;
+                            mainActivity.getTxtMode().setText("Finish Booking Mode");
                             mainActivity.getBtnLogout().setVisibility(View.VISIBLE);
 
                             Dialog dialog = new Dialog(currentActivity);

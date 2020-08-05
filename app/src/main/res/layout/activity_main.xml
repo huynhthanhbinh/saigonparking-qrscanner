@@ -12,6 +12,19 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize">
 
+        <TextView
+            android:id="@+id/txtMode"
+            android:visibility="visible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginRight="16dp"
+            android:layout_marginLeft="16dp"
+            android:gravity="start|center_vertical"
+            android:text="Finish Booking Mode"
+            android:textStyle="bold"
+            android:scaleType="centerCrop" />
 
         <Button
             android:id="@+id/logoutButton"

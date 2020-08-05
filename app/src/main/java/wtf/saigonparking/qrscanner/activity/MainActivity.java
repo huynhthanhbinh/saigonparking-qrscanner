@@ -8,6 +8,7 @@ import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
@@ -22,6 +23,8 @@ public final class MainActivity extends BaseSaigonParkingActivity implements ZXi
     private ZXingScannerView mScannerView;
     @Getter
     private Button btnLogout;
+    @Getter
+    private TextView txtMode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +33,9 @@ public final class MainActivity extends BaseSaigonParkingActivity implements ZXi
 
         ActivityCompat.requestPermissions(MainActivity.this,
                 new String[]{Manifest.permission.CAMERA}, 1);
+
+        txtMode = findViewById(R.id.txtMode);
+        txtMode.setText(applicationContext.isLoggedIn() ? "Finish Booking Mode" : "Login Mode");
 
         btnLogout = findViewById(R.id.logoutButton);
         btnLogout.setOnClickListener(this::onLogout);
@@ -43,7 +49,10 @@ public final class MainActivity extends BaseSaigonParkingActivity implements ZXi
     private void onLogout(@NonNull View view) {
         applicationContext.setLoggedIn(false);
         applicationContext.closeWebSocketConnection();
+
+        txtMode.setText("Login Mode");
         btnLogout.setVisibility(View.INVISIBLE);
+
         changeActivity(LoginActivity.class, false);
         Toast.makeText(applicationContext.getCurrentActivity(),
                 "Connection closed !", Toast.LENGTH_SHORT).show();
