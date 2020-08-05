@@ -1,72 +1,72 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-3    package="kz.zhakhanyergali.qrscanner"
+3    package="wtf.saigonparking.qrscanner.d"
 4    android:versionCode="1"
 5    android:versionName="1.0" >
 6
 7    <uses-sdk
-8        android:minSdkVersion="18"
+8        android:minSdkVersion="26"
 8-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml
-9        android:targetSdkVersion="26" />
+9        android:targetSdkVersion="27" />
 9-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml
 10
 11    <uses-permission android:name="android.permission.CAMERA" />
 11-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:5:5-65
 11-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:5:22-62
-12
-13    <uses-feature android:name="android.hardware.camera" />
-13-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:6:5-60
-13-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:6:19-57
-14    <uses-feature android:name="android.hardware.camera.autofocus" />
-14-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:7:5-70
-14-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:7:19-67
-15
-16    <uses-permission android:name="android.permission.FLASHLIGHT" />
-16-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:8:5-68
-16-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:8:22-66
-17
-18    <application
-18-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:10:5-32:19
-19        android:allowBackup="true"
-19-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:11:9-35
-20        android:debuggable="true"
-21        android:icon="@drawable/logo"
-21-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:12:9-38
-22        android:label="@string/app_name"
-22-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:13:9-41
-23        android:roundIcon="@drawable/logo"
-23-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:14:9-43
-24        android:supportsRtl="true"
-24-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:15:9-35
-25        android:theme="@style/AppTheme" >
-25-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:16:9-40
-26        <activity
-26-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:17:9-25:20
-27            android:name="kz.zhakhanyergali.qrscanner.Activity.LaunchScreenActivity"
-27-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:18:13-58
-28            android:theme="@style/AppTheme.NoActionBar" >
-28-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:19:13-56
-29            <intent-filter>
-29-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:20:13-24:29
-30                <action android:name="android.intent.action.MAIN" />
-30-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:21:17-69
-30-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:21:25-66
-31
-32                <category android:name="android.intent.category.LAUNCHER" />
-32-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:23:17-77
-32-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:23:27-74
-33            </intent-filter>
-34        </activity>
-35        <activity
-35-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:26:9-28:59
-36            android:name="kz.zhakhanyergali.qrscanner.Activity.MainActivity"
-36-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:27:13-50
-37            android:theme="@style/AppTheme.NoActionBar" />
-37-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:28:13-56
+12    <uses-permission android:name="android.permission.INTERNET" />
+12-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:6:5-67
+12-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:6:22-64
+13
+14    <uses-feature android:name="android.hardware.camera" />
+14-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:8:5-60
+14-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:8:19-57
+15    <uses-feature android:name="android.hardware.camera.autofocus" />
+15-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:9:5-70
+15-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:9:19-67
+16
+17    <uses-permission android:name="android.permission.FLASHLIGHT" />
+17-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:11:5-69
+17-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:11:22-66
+18
+19    <application
+19-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:13:5-32:19
+20        android:name="wtf.saigonparking.qrscanner.SaigonParkingApplication"
+20-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:14:9-49
+21        android:allowBackup="true"
+21-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:15:9-35
+22        android:debuggable="true"
+23        android:icon="@drawable/logo"
+23-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:16:9-38
+24        android:label="@string/app_name"
+24-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:17:9-41
+25        android:roundIcon="@drawable/logo"
+25-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:18:9-43
+26        android:supportsRtl="true"
+26-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:19:9-35
+27        android:testOnly="true"
+28        android:theme="@style/AppTheme" >
+28-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:20:9-40
+29        <activity
+29-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:21:9-28:20
+30            android:name="wtf.saigonparking.qrscanner.activity.LoginActivity"
+30-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:22:13-78
+31            android:theme="@style/AppTheme.NoActionBar" >
+31-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:23:13-56
+32            <intent-filter>
+32-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:24:13-27:29
+33                <action android:name="android.intent.action.MAIN" />
+33-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:25:17-69
+33-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:25:25-66
+34
+35                <category android:name="android.intent.category.LAUNCHER" />
+35-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:26:17-77
+35-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:26:27-74
+36            </intent-filter>
+37        </activity>
 38        <activity
-38-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:29:9-31:59
-39            android:name="kz.zhakhanyergali.qrscanner.Activity.HistoryActivity"
-39-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:30:13-53
+38-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:29:9-31:68
+39            android:name="wtf.saigonparking.qrscanner.activity.MainActivity"
+39-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:30:13-77
 40            android:theme="@style/AppTheme.NoActionBar" />
 40-->D:\Do An Cuoi Ki\saigonparking-qrscanner\app\src\main\AndroidManifest.xml:31:13-56
 41

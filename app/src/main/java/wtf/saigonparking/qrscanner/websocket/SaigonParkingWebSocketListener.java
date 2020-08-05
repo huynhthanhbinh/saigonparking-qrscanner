@@ -3,7 +3,6 @@ package wtf.saigonparking.qrscanner.websocket;
 import android.app.Dialog;
 import android.util.Log;
 import android.view.View;
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -49,10 +48,10 @@ public final class SaigonParkingWebSocketListener extends WebSocketListener {
 
                 switch (message.getType()) {
                     case ERROR:
-                        Log.d("BachMap", "Error booking again");
+                        Log.d("TaiSmile", "Error booking again");
                         ErrorContent errorContent = ErrorContent.parseFrom(message.getContent());
                         String internalErrorCode = errorContent.getInternalErrorCode();
-                        Log.d("BachMap", "Error booking again: " + internalErrorCode);
+                        Log.d("TaiSmile", "Error booking again: " + internalErrorCode);
                         break;
                     case NOTIFICATION:
                         NotificationContent notificationContent = NotificationContent.parseFrom(message.getContent());
@@ -62,18 +61,15 @@ public final class SaigonParkingWebSocketListener extends WebSocketListener {
 
                             /* Create socket connection successfully */
                             applicationContext.setLoggedIn(true);
-
-                            TextView textView = new TextView(currentActivity);
-                            textView.setText("Connection established");
-
                             Dialog dialog = new Dialog(currentActivity);
-                            dialog.setContentView(textView);
-                            dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
                             dialog.setCancelable(true);
                             dialog.setContentView(R.layout.custom_dialog);
 
-                            View v = Objects.requireNonNull(dialog.getWindow()).getDecorView();
-                            v.setBackgroundResource(android.R.color.transparent);
+                            View view = Objects.requireNonNull(dialog.getWindow()).getDecorView();
+                            view.setBackgroundResource(android.R.color.transparent);
+
+                            TextView textView = dialog.findViewById(R.id.txtTextView);
+                            textView.setText("Connection established !");
 
                             ImageView img = dialog.findViewById(R.id.imgOfDialog);
                             img.setImageResource(R.drawable.ic_done_gr);
@@ -97,6 +93,6 @@ public final class SaigonParkingWebSocketListener extends WebSocketListener {
 
     @Override
     public void onFailure(@NotNull WebSocket webSocket, Throwable t, Response response) {
-        Log.d("BachMap", t.getMessage());
+        Log.d("TaiSmile", t.toString());
     }
 }

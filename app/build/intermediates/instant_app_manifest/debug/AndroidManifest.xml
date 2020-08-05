@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="kz.zhakhanyergali.qrscanner"
+    package="wtf.saigonparking.qrscanner.d"
     android:targetSandboxVersion="2"
     android:versionCode="1"
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="18"
-        android:targetSdkVersion="26" />
+        android:minSdkVersion="26"
+        android:targetSdkVersion="27" />
 
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -17,15 +18,17 @@
     <uses-permission android:name="android.permission.FLASHLIGHT" />
 
     <application
+        android:name="wtf.saigonparking.qrscanner.SaigonParkingApplication"
         android:allowBackup="true"
         android:debuggable="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo"
         android:supportsRtl="true"
+        android:testOnly="true"
         android:theme="@style/AppTheme" >
         <activity
-            android:name="kz.zhakhanyergali.qrscanner.Activity.LaunchScreenActivity"
+            android:name="wtf.saigonparking.qrscanner.activity.LoginActivity"
             android:theme="@style/AppTheme.NoActionBar" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -34,10 +37,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="kz.zhakhanyergali.qrscanner.Activity.MainActivity"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name="kz.zhakhanyergali.qrscanner.Activity.HistoryActivity"
+            android:name="wtf.saigonparking.qrscanner.activity.MainActivity"
             android:theme="@style/AppTheme.NoActionBar" />
 
         <meta-data

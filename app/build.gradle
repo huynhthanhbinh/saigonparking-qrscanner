@@ -2,14 +2,12 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 28
-    buildToolsVersion "28.0.0"
     defaultConfig {
         applicationId "wtf.saigonparking.qrscanner"
         minSdkVersion 26
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -32,6 +30,16 @@ android {
         sourceCompatibility = 1.8
         targetCompatibility = 1.8
     }
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == "com.android.support") {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion "26.+"
+                }
+            }
+        }
+    }
 }
 
 dependencies {
@@ -42,6 +50,7 @@ dependencies {
 
     //setup saigon parking internal API
     implementation files('libs/saigonparking-official-api.jar')
+
     implementation 'io.grpc:grpc-protobuf:1.30.0'
     implementation 'com.android.support:appcompat-v7:28.0.0'
     implementation 'com.android.support:support-v4:28.0.0'

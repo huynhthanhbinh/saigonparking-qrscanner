@@ -18,8 +18,6 @@ import wtf.saigonparking.qrscanner.base.BaseSaigonParkingActivity;
 @Getter
 public final class LoginActivity extends BaseSaigonParkingActivity {
 
-    private static final String TAG = "LoginActivity";
-    private static final int REQUEST_SIGNUP = 0;
     private AuthServiceGrpc.AuthServiceBlockingStub authServiceBlockingStub;
 
     @BindView(R.id.btn_login)

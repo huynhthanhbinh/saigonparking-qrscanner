@@ -7,7 +7,7 @@
         android:targetSdkVersion="27" />
 
     <instrumentation
-        android:name="android.support.test.runner.AndroidJUnitRunner"
+        android:name="android.test.InstrumentationTestRunner"
         android:functionalTest="false"
         android:handleProfiling="false"
         android:label="Tests for wtf.saigonparking.qrscanner.d"
