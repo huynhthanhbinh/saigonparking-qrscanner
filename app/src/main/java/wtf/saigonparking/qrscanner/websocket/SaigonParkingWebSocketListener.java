@@ -22,6 +22,7 @@ import okhttp3.WebSocketListener;
 import okio.ByteString;
 import wtf.saigonparking.qrscanner.R;
 import wtf.saigonparking.qrscanner.SaigonParkingApplication;
+import wtf.saigonparking.qrscanner.activity.MainActivity;
 import wtf.saigonparking.qrscanner.base.BaseSaigonParkingActivity;
 
 @RequiredArgsConstructor
@@ -61,6 +62,9 @@ public final class SaigonParkingWebSocketListener extends WebSocketListener {
 
                             /* Create socket connection successfully */
                             applicationContext.setLoggedIn(true);
+                            MainActivity mainActivity = (MainActivity) currentActivity;
+                            mainActivity.getBtnLogout().setVisibility(View.VISIBLE);
+
                             Dialog dialog = new Dialog(currentActivity);
                             dialog.setCancelable(true);
                             dialog.setContentView(R.layout.custom_dialog);
@@ -74,12 +78,12 @@ public final class SaigonParkingWebSocketListener extends WebSocketListener {
                             ImageView img = dialog.findViewById(R.id.imgOfDialog);
                             img.setImageResource(R.drawable.ic_done_gr);
                             dialog.show();
+
+                            dialog.setOnDismissListener(dialogInterface -> mainActivity.onScanSuccess());
                         }
                         break;
                 }
-
-            } catch (
-                    Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
         });

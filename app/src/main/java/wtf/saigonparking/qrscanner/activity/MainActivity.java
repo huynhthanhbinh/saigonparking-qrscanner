@@ -7,11 +7,12 @@ import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.zxing.Result;
 
+import lombok.Getter;
 import me.dm7.barcodescanner.zxing.ZXingScannerView;
 import wtf.saigonparking.qrscanner.R;
 import wtf.saigonparking.qrscanner.base.BaseSaigonParkingActivity;
@@ -19,7 +20,8 @@ import wtf.saigonparking.qrscanner.base.BaseSaigonParkingActivity;
 public final class MainActivity extends BaseSaigonParkingActivity implements ZXingScannerView.ResultHandler {
 
     private ZXingScannerView mScannerView;
-    private ImageView imgLogout;
+    @Getter
+    private Button btnLogout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,8 +31,8 @@ public final class MainActivity extends BaseSaigonParkingActivity implements ZXi
         ActivityCompat.requestPermissions(MainActivity.this,
                 new String[]{Manifest.permission.CAMERA}, 1);
 
-        imgLogout = findViewById(R.id.logoutButton);
-        imgLogout.setOnClickListener(this::onLogout);
+        btnLogout = findViewById(R.id.logoutButton);
+        btnLogout.setOnClickListener(this::onLogout);
 
         ViewGroup contentFrame = findViewById(R.id.content_frame);
         mScannerView = new ZXingScannerView(this);
@@ -41,10 +43,16 @@ public final class MainActivity extends BaseSaigonParkingActivity implements ZXi
     private void onLogout(@NonNull View view) {
         applicationContext.setLoggedIn(false);
         applicationContext.closeWebSocketConnection();
+        btnLogout.setVisibility(View.INVISIBLE);
         changeActivity(LoginActivity.class, false);
         Toast.makeText(applicationContext.getCurrentActivity(),
                 "Connection closed !", Toast.LENGTH_SHORT).show();
         finish();
+    }
+
+    public void onScanSuccess() {
+        /* release camera for next scan */
+        mScannerView.resumeCameraPreview(this);
     }
 
     @Override
