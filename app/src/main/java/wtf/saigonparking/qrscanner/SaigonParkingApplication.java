@@ -28,7 +28,7 @@ public final class SaigonParkingApplication extends Application {
             BuildConfig.WEBSOCKET_PREFIX +
                     BuildConfig.GATEWAY_HOST + ":" +
                     BuildConfig.GATEWAY_HTTP_PORT +
-                    "/contact";
+                    "/contact/qrscanner";
 
     @Setter
     private BaseSaigonParkingActivity currentActivity = null;
