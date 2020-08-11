@@ -63,6 +63,7 @@ dependencies {
     implementation 'org.projectlombok:lombok:1.18.12'
     implementation 'org.conscrypt:conscrypt-android:2.2.1'
     implementation 'com.squareup.okhttp3:okhttp:4.7.2'
+    implementation 'gr.pantrif:easy-android-splash-screen:0.0.1'
 
     annotationProcessor 'org.projectlombok:lombok:1.18.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
