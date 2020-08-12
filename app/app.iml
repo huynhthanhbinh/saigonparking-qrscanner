@@ -101,7 +101,7 @@
     <orderEntry type="library" scope="TEST" name="Gradle: com.android.support.test:runner:0.5@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.android.support.test:exposed-instrumentation-api-publish:0.5@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: com.android.support.test.espresso:espresso-idling-resource:2.2.2@aar" level="project" />
-    <orderEntry type="library" name="Gradle: __local_aars__:E.\saigonparking-qrscanner\app\libs\saigonparking-official-api.jar:unspecified@jar" level="project" />
+    <orderEntry type="library" name="Gradle: __local_aars__:D.\Do An Cuoi Ki\saigonparking-qrscanner\app\libs\saigonparking-official-api.jar:unspecified@jar" level="project" />
     <orderEntry type="library" name="Gradle: io.grpc:grpc-protobuf:1.30.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: io.grpc:grpc-protobuf-lite:1.30.0@jar" level="project" />
     <orderEntry type="library" name="Gradle: io.grpc:grpc-api:1.30.0@jar" level="project" />
