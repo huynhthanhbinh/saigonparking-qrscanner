@@ -42,7 +42,6 @@ public final class SaigonParkingApplication extends Application {
     public void onCreate() {
         Log.d("BachMap", "onCreate: wtf.saigonparking.qrscanner.SaigonParkingApplication");
         super.onCreate();
-
         Locale.setDefault(Locale.US);
         applicationContext = getApplicationContext();
     }

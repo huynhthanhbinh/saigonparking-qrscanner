@@ -81,8 +81,6 @@ public final class SaigonParkingWebSocketListener extends WebSocketListener {
                             ImageView img = dialog.findViewById(R.id.imgOfDialog);
                             img.setImageResource(R.drawable.ic_done_gr);
                             dialog.show();
-
-                            dialog.setOnDismissListener(dialogInterface -> mainActivity.onScanSuccess());
                         }
                         break;
                     case BOOKING_FINISH:

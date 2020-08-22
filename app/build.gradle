@@ -14,9 +14,9 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 
-            buildConfigField "String", "WEBSOCKET_PREFIX", '"wss://"'
+            buildConfigField "String", "WEBSOCKET_PREFIX", '"ws://"'
             buildConfigField "String", "GATEWAY_HOST", '"saigonparking.wtf"'
-            buildConfigField "Integer", "GATEWAY_HTTP_PORT", "8443"
+            buildConfigField "Integer", "GATEWAY_HTTP_PORT", "8000"
         }
 
         debug {

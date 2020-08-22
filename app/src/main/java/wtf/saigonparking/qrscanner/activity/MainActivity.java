@@ -61,7 +61,7 @@ public final class MainActivity extends BaseSaigonParkingActivity implements ZXi
         finish();
     }
 
-    public void onScanSuccess() {
+    public void onContinueQRScan() {
         /* release camera for next scan */
         mScannerView.resumeCameraPreview(this);
     }
@@ -79,28 +79,43 @@ public final class MainActivity extends BaseSaigonParkingActivity implements ZXi
         mScannerView.stopCamera();
     }
 
+    private boolean isContentAJSONWebToken(String content) {
+        return content.matches("^[^.]+\\.[^.]+\\.[^.]+$");
+    }
+
+    private boolean isContentAUUID(String content) {
+        return content.matches("^[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}$");
+    }
+
     @Override
     public void handleResult(Result rawResult) {
         String content = rawResult.getText();
+//        Toast.makeText(this, "token: " + content, Toast.LENGTH_LONG).show();
+
         if (!applicationContext.isLoggedIn()) {
-            /* scan QR code to create socket connection */
-            /* TODO: after 10s not create connection successfully --> close and reopen connection */
-            applicationContext.createWebSocketConnection(content);
+            if (isContentAJSONWebToken(content)) { /* login mode, content is a JWT */
+                applicationContext.createWebSocketConnection(content);
+            } else { /* login mode, content is not a JWT */
+                Toast.makeText(this, "Content is not a JWT. Please scan again! " + content, Toast.LENGTH_SHORT).show();
+            }
 
         } else {
-            /* scan QR code to finish booking */
-            SaigonParkingMessage message = SaigonParkingMessage.newBuilder()
-                    .setClassification(SaigonParkingMessage.Classification.PARKING_LOT_MESSAGE)
-                    .setType(SaigonParkingMessage.Type.BOOKING_FINISH)
-                    .setReceiverId(0)
-                    .setContent(BookingFinishContent.newBuilder()
-                            .setBookingId(content)
-                            .build()
-                            .toByteString())
-                    .build();
-            sendWebSocketBinaryMessage(message);
-            onScanSuccess();
+            if (isContentAUUID(content)) { /* finish mode, content is a UUID */
+                SaigonParkingMessage message = SaigonParkingMessage.newBuilder()
+                        .setClassification(SaigonParkingMessage.Classification.PARKING_LOT_MESSAGE)
+                        .setType(SaigonParkingMessage.Type.BOOKING_FINISH)
+                        .setReceiverId(0)
+                        .setContent(BookingFinishContent.newBuilder()
+                                .setBookingId(content)
+                                .build()
+                                .toByteString())
+                        .build();
+                sendWebSocketBinaryMessage(message);
+            } else { /* finish mode, content is not a UUID */
+                Toast.makeText(this, "Content is not a UUID. Please scan again! " + content, Toast.LENGTH_SHORT).show();
+            }
         }
+        onContinueQRScan();
     }
 
     @Override

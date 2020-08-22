@@ -1,13 +1,15 @@
 package wtf.saigonparking.qrscanner.activity;
 
 import android.graphics.Color;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+
 import gr.net.maroulis.library.EasySplashScreen;
 import wtf.saigonparking.qrscanner.R;
+import wtf.saigonparking.qrscanner.base.BaseSaigonParkingActivity;
 
-public class SplashScreenActivity extends AppCompatActivity {
+public final class SplashScreenActivity extends BaseSaigonParkingActivity {
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
