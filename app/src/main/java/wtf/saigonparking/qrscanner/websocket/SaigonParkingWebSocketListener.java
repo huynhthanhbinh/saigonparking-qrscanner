@@ -5,7 +5,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bht.saigonparking.api.grpc.contact.BookingFinishContent;
 import com.bht.saigonparking.api.grpc.contact.ErrorContent;
@@ -51,10 +50,10 @@ public final class SaigonParkingWebSocketListener extends WebSocketListener {
 
                 switch (message.getType()) {
                     case ERROR:
-                        Log.d("TaiSmile", "Error booking again");
                         ErrorContent errorContent = ErrorContent.parseFrom(message.getContent());
                         String internalErrorCode = errorContent.getInternalErrorCode();
-                        Log.d("TaiSmile", "Error booking again: " + internalErrorCode);
+                        Log.d("TaiSmile", "Error booking: " + internalErrorCode);
+                        ((MainActivity) currentActivity).onContinueQRScan();
                         break;
                     case NOTIFICATION:
                         NotificationContent notificationContent = NotificationContent.parseFrom(message.getContent());
@@ -64,9 +63,12 @@ public final class SaigonParkingWebSocketListener extends WebSocketListener {
 
                             /* Create socket connection successfully */
                             applicationContext.setLoggedIn(true);
+                            String currentMode = "Finish Booking Mode";
                             MainActivity mainActivity = (MainActivity) currentActivity;
-                            mainActivity.getTxtMode().setText("Finish Booking Mode");
+                            mainActivity.getTxtMode().setText(currentMode);
                             mainActivity.getBtnLogout().setVisibility(View.VISIBLE);
+
+                            String dialogContent = "Connection established !";
 
                             Dialog dialog = new Dialog(currentActivity);
                             dialog.setCancelable(true);
@@ -76,17 +78,35 @@ public final class SaigonParkingWebSocketListener extends WebSocketListener {
                             view.setBackgroundResource(android.R.color.transparent);
 
                             TextView textView = dialog.findViewById(R.id.txtTextView);
-                            textView.setText("Connection established !");
+                            textView.setText(dialogContent);
 
                             ImageView img = dialog.findViewById(R.id.imgOfDialog);
                             img.setImageResource(R.drawable.ic_done_gr);
                             dialog.show();
+
+                            dialog.setOnDismissListener(dialogInterface -> mainActivity.onContinueQRScan());
                         }
                         break;
                     case BOOKING_FINISH:
                         BookingFinishContent bookingFinishContent = BookingFinishContent.parseFrom(message.getContent());
-                        Toast.makeText(currentActivity, "Finish booking with id: " +
-                                bookingFinishContent.getBookingId(), Toast.LENGTH_SHORT).show();
+                        String dialogContent = "Finish booking with id: " + bookingFinishContent.getBookingId();
+
+                        MainActivity mainActivity = (MainActivity) currentActivity;
+                        Dialog dialog = new Dialog(mainActivity);
+                        dialog.setCancelable(true);
+                        dialog.setContentView(R.layout.custom_dialog);
+
+                        View view = Objects.requireNonNull(dialog.getWindow()).getDecorView();
+                        view.setBackgroundResource(android.R.color.transparent);
+
+                        TextView textView = dialog.findViewById(R.id.txtTextView);
+                        textView.setText(dialogContent);
+
+                        ImageView img = dialog.findViewById(R.id.imgOfDialog);
+                        img.setImageResource(R.drawable.ic_done_gr);
+                        dialog.show();
+
+                        dialog.setOnDismissListener(dialogInterface -> mainActivity.onContinueQRScan());
                         break;
                 }
             } catch (Exception e) {
@@ -94,7 +114,6 @@ public final class SaigonParkingWebSocketListener extends WebSocketListener {
             }
         });
     }
-
 
     @Override
     public void onClosing(WebSocket webSocket, int code, @NotNull String reason) {
