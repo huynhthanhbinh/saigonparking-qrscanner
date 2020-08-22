@@ -85,7 +85,8 @@ public final class MainActivity extends BaseSaigonParkingActivity implements ZXi
     }
 
     private boolean isContentAUUID(@NonNull String content) {
-        return content.matches("^[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}$");
+        return content.matches
+                ("^[A-Za-z0-9]{8}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{4}-[A-Za-z0-9]{12}$");
     }
 
     @Override
