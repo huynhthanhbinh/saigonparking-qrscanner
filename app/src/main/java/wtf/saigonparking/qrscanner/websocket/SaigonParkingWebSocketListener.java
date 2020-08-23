@@ -29,7 +29,7 @@ import wtf.saigonparking.qrscanner.base.BaseSaigonParkingActivity;
 @RequiredArgsConstructor
 public final class SaigonParkingWebSocketListener extends WebSocketListener {
 
-    private static final int NORMAL_CLOSURE_STATUS = 1000;
+    public static final int NORMAL_CLOSURE_STATUS = 1000;
     private static final String CONNECTION_ESTABLISHED_NOTIFICATION
             = "Connection to Contact service established !";
 

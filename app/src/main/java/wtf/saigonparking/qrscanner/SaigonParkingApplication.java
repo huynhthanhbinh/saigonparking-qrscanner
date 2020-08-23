@@ -15,6 +15,8 @@ import okhttp3.WebSocket;
 import wtf.saigonparking.qrscanner.base.BaseSaigonParkingActivity;
 import wtf.saigonparking.qrscanner.websocket.SaigonParkingWebSocketListener;
 
+import static wtf.saigonparking.qrscanner.websocket.SaigonParkingWebSocketListener.NORMAL_CLOSURE_STATUS;
+
 /**
  * Entry point of android application
  * Will be run first before all Activity classes
@@ -62,7 +64,7 @@ public final class SaigonParkingApplication extends Application {
     public final void closeWebSocketConnection() {
         if (webSocket != null) {
             try {
-                webSocket.cancel();
+                webSocket.close(NORMAL_CLOSURE_STATUS, null);
             } catch (Exception exception) {
                 Log.d("TaiSmile", "Error closeWebSocketConnection: " + exception.getClass().getSimpleName());
             }
